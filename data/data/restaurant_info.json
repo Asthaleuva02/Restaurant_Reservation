@@ -1,0 +1,29 @@
+{
+    "name": "Dine Time",
+    "tagline": "Authentic Indian Food",
+    "address": "Dine Time  Ahmedabad Gujarat 380019",
+    "phone": "+91 8849700293",
+    "email": "astha@gmail.com",
+    "hours": {
+        "Monday": "11:00 AM - 9:00 PM",
+        "Tuesday": "11:00 AM - 9:00 PM",
+        "Wednesday": "11:00 AM - 9:00 PM",
+        "Thursday": "11:00 AM - 9:00 PM",
+        "Friday": "11:00 AM - 10:00 PM",
+        "Saturday": "10:00 AM - 10:00 PM",
+        "Sunday": "10:00 AM - 9:00 PM"
+    },
+    "social_media": {
+        "facebook": "https://facebook.com/bellacucina",
+        "instagram": "https://instagram.com/bellacucina",
+        "twitter": "https://twitter.com/bellacucina"
+    },
+    "about": "Bella Cucina brings the heart of Italy to your table with authentic recipes passed down through generations. Our chefs use only the finest ingredients to create memorable dining experiences in a warm, inviting atmosphere.",
+    "services": [
+        "Dine-in",
+        "Takeout", 
+        "Online Reservations",
+        "Private Events",
+        "Catering"
+    ]
+}

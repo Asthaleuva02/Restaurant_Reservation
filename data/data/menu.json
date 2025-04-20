@@ -1,0 +1,88 @@
+{
+    "appetizers": [
+        {
+            "id": 1,
+            "name": "Samosa",
+            "description": "Toasted bread topped with fresh tomatoes, basil, and garlic",
+            "price": 8.99
+        },
+        {
+            "id": 2,
+            "name": "vada pav",
+            "description": "Crispy fried squid served with marinara sauce",
+            "price": 12.99
+        },
+        {
+            "id": 3,
+            "name": "Caprese Salad",
+            "description": "Fresh mozzarella, tomatoes, and basil drizzled with balsamic glaze",
+            "price": 10.99
+        }
+    ],
+    "main_courses": [
+        {
+            "id": 4,
+            "name": "Spaghetti Carbonara",
+            "description": "Classic pasta with eggs, cheese, pancetta, and black pepper",
+            "price": 16.99
+        },
+        {
+            "id": 5,
+            "name": "Grilled Salmon",
+            "description": "Fresh salmon fillet with lemon herb butter and seasonal vegetables",
+            "price": 22.99
+        },
+        {
+            "id": 6,
+            "name": "Chicken Parmesan",
+            "description": "Breaded chicken breast topped with marinara and mozzarella, served with pasta",
+            "price": 18.99
+        },
+        {
+            "id": 7,
+            "name": "Ribeye Steak",
+            "description": "12oz ribeye cooked to perfection with roasted potatoes",
+            "price": 28.99
+        }
+    ],
+    "desserts": [
+        {
+            "id": 8,
+            "name": "Tiramisu",
+            "description": "Classic Italian coffee-flavored dessert",
+            "price": 8.99
+        },
+        {
+            "id": 9,
+            "name": "Chocolate Lava Cake",
+            "description": "Warm chocolate cake with a molten center, served with vanilla ice cream",
+            "price": 9.99
+        },
+        {
+            "id": 10,
+            "name": "Cheesecake",
+            "description": "New York style cheesecake with berry compote",
+            "price": 8.99
+        }
+    ],
+    "drinks": [
+        {
+            "id": 11,
+            "name": "House Wine (Glass)",
+            "description": "Red or white house selection",
+            "price": 7.99
+        },
+        {
+            "id": 12,
+            "name": "Craft Beer",
+            "description": "Selection of local craft beers",
+            "price": 6.99
+        },
+        {
+            "id": 13,
+            "name": "Italian Soda",
+            "description": "Flavored sparkling beverage",
+            "price": 4.99
+        }
+    ]
+}
