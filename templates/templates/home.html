@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+    <div class="container text-white hero-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4">{{ info.name }}</h1>
+                <h2 class="fs-3 mb-4">{{ info.tagline }}</h2>
+                <p class="lead mb-5">{{ info.about }}</p>
+                <div class="d-flex gap-3">
+                    <a href="{{ url_for('menu') }}" class="btn btn-primary btn-lg">View Menu</a>
+                    <a href="{{ url_for('booking') }}" class="btn btn-outline-light btn-lg">Book A Table</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Welcome Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2 class="display-5 mb-4">Welcome to {{ info.name }}</h2>
+                <p class="lead">{{ info.about }}</p>
+                <div class="mt-4">
+                    <h4>Our Services</h4>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        {% for service in info.services %}
+                            <span class="badge bg-secondary p-2">{{ service }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 h-100">
+                    <div class="card-body bg-dark">
+                        <h3 class="card-title border-bottom pb-3 mb-4">Opening Hours</h3>
+                        <ul class="list-group list-group-flush">
+                            {% for day, hours in info.hours.items() %}
+                                <li class="list-group-item bg-transparent py-3 px-0 border-bottom">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>{{ day }}</strong>
+                                        <span>{{ hours }}</span>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="mt-4">
+                            <a href="{{ url_for('booking') }}" class="btn btn-primary">Make a Reservation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Menu Section -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5">Featured Menu</h2>
+            <p class="lead">Taste the best of what we have to offer</p>
+        </div>
+        <div class="row">
+            <!-- Appetizers -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">Appetizers</h4>
+                        <p class="card-text">Start your meal with our delicious appetizers made with fresh ingredients.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{{ url_for('menu') }}#appetizers" class="btn btn-outline-primary">View All</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Courses -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">Main Courses</h4>
+                        <p class="card-text">Enjoy our chef's specialties prepared with authentic Italian recipes.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{{ url_for('menu') }}#main-courses" class="btn btn-outline-primary">View All</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desserts -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">Desserts</h4>
+                        <p class="card-text">Complete your dining experience with our decadent dessert selection.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{{ url_for('menu') }}#desserts" class="btn btn-outline-primary">View All</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Drinks -->
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">Drinks</h4>
+                        <p class="card-text">Pair your meal with our selection of fine wines, craft beers, and specialty drinks.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{{ url_for('menu') }}#drinks" class="btn btn-outline-primary">View All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('menu') }}" class="btn btn-primary btn-lg">View Full Menu</a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5" style="background-image: url('https://images.unsplash.com/photo-1602033693387-3531914e7b42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); background-size: cover; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7);"></div>
+    <div class="container position-relative text-white text-center py-5">
+        <h2 class="display-4 mb-4">Reserve Your Table Today</h2>
+        <p class="lead mb-5">Experience authentic Italian cuisine in an elegant atmosphere.</p>
+        <a href="{{ url_for('booking') }}" class="btn btn-primary btn-lg px-5 py-3">Book Now</a>
+    </div>
+</section>
+
+<!-- Map & Contact Info -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h3 class="mb-4">Find Us</h3>
+                <!-- Embedded map - using OpenStreetMap as static image -->
+                <div class="ratio ratio-16x9 mb-3">
+                    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-0.11%2C51.50%2C-0.10%2C51.51&amp;layer=mapnik" style="border: 1px solid var(--bs-secondary)"></iframe>
+                </div>
+                <p><i class="fas fa-map-marker-alt me-2"></i>{{ info.address }}</p>
+            </div>
+            <div class="col-lg-6">
+                <h3 class="mb-4">Contact Us</h3>
+                <p class="mb-4">Have questions or special requests? We're here to help.</p>
+                <ul class="list-unstyled">
+                    <li class="mb-3"><i class="fas fa-phone me-2"></i>{{ info.phone }}</li>
+                    <li class="mb-3"><i class="fas fa-envelope me-2"></i>{{ info.email }}</li>
+                </ul>
+                <div class="mt-4">
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary">Send Us a Message</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

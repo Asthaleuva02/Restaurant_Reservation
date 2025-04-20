@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - {{ info.name }}{% endblock %}
+
+{% block content %}
+<!-- Contact Hero Section -->
+<section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); min-height: 400px;">
+    <div class="container text-white hero-content text-center">
+        <h1 class="display-3 fw-bold mb-4">Contact Us</h1>
+        <p class="lead">Have questions or feedback? We'd love to hear from you!</p>
+    </div>
+</section>
+
+<!-- Contact Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h2 class="mb-4">Send Us a Message</h2>
+                <p class="lead mb-4">Fill out the form below, and we'll get back to you as soon as possible.</p>
+                
+                <form id="contact-form" method="post" action="{{ url_for('contact') }}">
+                    <div class="mb-3">
+                        <label for="contact-name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="contact-name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact-email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="contact-email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact-subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="contact-subject" name="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact-message" class="form-label">Message</label>
+                        <textarea class="form-control" id="contact-message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card border-0 h-100">
+                    <div class="card-body bg-dark">
+                        <h3 class="card-title mb-4">Contact Information</h3>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-map-marker-alt me-2"></i>Address</h5>
+                            <p>{{ info.address }}</p>
+                            <div class="ratio ratio-16x9 mb-3">
+                                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-0.11%2C51.50%2C-0.10%2C51.51&amp;layer=mapnik" style="border: 1px solid var(--bs-secondary)"></iframe>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-phone me-2"></i>Phone</h5>
+                            <p>{{ info.phone }}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-envelope me-2"></i>Email</h5>
+                            <p>{{ info.email }}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-clock me-2"></i>Hours</h5>
+                            <ul class="list-group list-group-flush">
+                                {% for day, hours in info.hours.items() %}
+                                    <li class="list-group-item bg-transparent py-2 px-0 border-bottom">
+                                        <div class="d-flex justify-content-between">
+                                            <strong>{{ day }}</strong>
+                                            <span>{{ hours }}</span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h5><i class="fas fa-share-alt me-2"></i>Follow Us</h5>
+                            <div class="d-flex gap-3 mt-2">
+                                <a href="{{ info.social_media.facebook }}" target="_blank" class="text-light fs-4" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                                <a href="{{ info.social_media.instagram }}" target="_blank" class="text-light fs-4" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="{{ info.social_media.twitter }}" target="_blank" class="text-light fs-4" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="contactFAQ">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Do you offer catering services?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body">
+                                Yes, we offer catering for private events, corporate functions, and special occasions. Please contact us at {{ info.email }} with details of your event for a customized quote.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Can I host a private event at your restaurant?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body">
+                                Absolutely! We have private dining areas that can accommodate various group sizes. Please contact us to discuss your event requirements and to check availability.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Is parking available?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body">
+                                Yes, we have a parking lot adjacent to the restaurant for our customers. During peak hours, we also offer complimentary valet parking service.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                How can I apply for a job at your restaurant?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body">
+                                We're always looking for talented individuals to join our team. Please send your resume to {{ info.email }} with the subject line "Employment Opportunity".
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

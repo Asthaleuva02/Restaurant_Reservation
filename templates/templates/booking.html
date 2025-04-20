@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block title %}Reservations - {{ info.name }}{% endblock %}
+
+{% block content %}
+<!-- Booking Hero Section -->
+<section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80'); min-height: 400px;">
+    <div class="container text-white hero-content text-center">
+        <h1 class="display-3 fw-bold mb-4">Book a Table</h1>
+        <p class="lead">Reserve your spot for an unforgettable dining experience</p>
+    </div>
+</section>
+
+<!-- Booking Form -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h2 class="mb-4">Make a Reservation</h2>
+                <p class="lead mb-4">Select your preferred date, time, and party size to check availability.</p>
+                
+                <form id="booking-form">
+                    <!-- Step 1: Check Availability -->
+                    <div class="booking-form">
+                        <h3 class="mb-4">Step 1: Check Availability</h3>
+                        <div class="mb-3">
+                            <label for="booking-date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="booking-date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="booking-time" class="form-label">Time</label>
+                            <select class="form-select" id="booking-time" required>
+                                <option value="" selected disabled>Select a time</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="12:30">12:30 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="13:30">1:30 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="14:30">2:30 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="17:30">5:30 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="18:30">6:30 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="19:30">7:30 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                                <option value="20:30">8:30 PM</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="booking-guests" class="form-label">Number of Guests</label>
+                            <input type="number" class="form-control" id="booking-guests" min="1" max="20" value="2" required>
+                        </div>
+                        <button type="button" id="check-availability" class="btn btn-primary">Check Availability</button>
+                        <div id="availability-message" class="mt-3"></div>
+                    </div>
+                    
+                    <!-- Step 2: Complete Booking -->
+                    <div id="availability-section" class="booking-form mt-4 d-none">
+                        <h3 class="mb-4">Step 2: Complete Your Booking</h3>
+                        <div class="mb-3">
+                            <label for="table-selection" class="form-label">Select Table</label>
+                            <select class="form-select" id="table-selection" required>
+                                <!-- Options will be populated by JS -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="customer-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="customer-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer-phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="customer-phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="special-requests" class="form-label">Special Requests (Optional)</label>
+                            <textarea class="form-control" id="special-requests" rows="3"></textarea>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="privacy-policy" required>
+                            <label class="form-check-label" for="privacy-policy">
+                                I agree to the privacy policy and terms of service.
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success">Complete Reservation</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card border-0 h-100">
+                    <div class="card-body bg-dark">
+                        <h3 class="card-title mb-4">Reservation Information</h3>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-clock me-2"></i>Opening Hours</h5>
+                            <ul class="list-group list-group-flush">
+                                {% for day, hours in info.hours.items() %}
+                                    <li class="list-group-item bg-transparent py-2 px-0 border-bottom">
+                                        <div class="d-flex justify-content-between">
+                                            <strong>{{ day }}</strong>
+                                            <span>{{ hours }}</span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-info-circle me-2"></i>Reservation Policy</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Reservations are held for 15 minutes past the reservation time.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>We require a minimum of 2 hours notice for cancellations.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>For parties of 6 or more, please call us directly at {{ info.phone }}.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Special requests are accommodated based on availability.</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h5><i class="fas fa-phone me-2"></i>Need Help?</h5>
+                            <p>If you have any questions or need assistance with your reservation, please contact us at:</p>
+                            <p class="mb-1"><strong>Phone:</strong> {{ info.phone }}</p>
+                            <p><strong>Email:</strong> {{ info.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="bookingFAQ">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Do I need a reservation?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#bookingFAQ">
+                            <div class="accordion-body">
+                                While walk-ins are welcome, we recommend making a reservation, especially during weekends and holidays to ensure you have a table.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How far in advance should I make a reservation?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#bookingFAQ">
+                            <div class="accordion-body">
+                                We recommend booking at least 2-3 days in advance for weekday dining and 5-7 days for weekend dining. For special occasions or large parties, booking 1-2 weeks in advance is advised.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                How do I cancel or modify my reservation?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#bookingFAQ">
+                            <div class="accordion-body">
+                                To cancel or modify your reservation, please call us at {{ info.phone }} at least 2 hours before your scheduled reservation time.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Do you accommodate special dietary needs?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#bookingFAQ">
+                            <div class="accordion-body">
+                                Yes! We can accommodate various dietary restrictions including vegetarian, vegan, gluten-free, and allergies. Please mention your requirements in the special requests section when booking.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+{% endblock %}

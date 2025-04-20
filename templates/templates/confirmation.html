@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}Reservation Confirmed - {{ info.name }}{% endblock %}
+
+{% block content %}
+<!-- Confirmation Hero Section -->
+<section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1527224538127-2104bb71c51b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80'); min-height: 400px;">
+    <div class="container text-white hero-content text-center">
+        <h1 class="display-3 fw-bold mb-4">Reservation Confirmed!</h1>
+        <p class="lead">We look forward to welcoming you at {{ info.name }}</p>
+    </div>
+</section>
+
+<!-- Confirmation Details -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="reservation-details">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        <h2 class="mt-3">Thank You for Your Reservation</h2>
+                        <p class="lead">Your table has been successfully reserved. We've sent a confirmation email to {{ reservation.email }}.</p>
+                    </div>
+                    
+                    <div class="card bg-dark mb-4">
+                        <div class="card-header">
+                            <h3 class="mb-0">Reservation Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <strong>Reservation ID:</strong>
+                                    <p>{{ reservation.id[:8] }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Status:</strong>
+                                    <p><span class="badge bg-success">{{ reservation.status }}</span></p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Name:</strong>
+                                    <p>{{ reservation.name }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Email:</strong>
+                                    <p>{{ reservation.email }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Phone:</strong>
+                                    <p>{{ reservation.phone }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Number of Guests:</strong>
+                                    <p>{{ reservation.guests }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Date:</strong>
+                                    <p>{{ reservation.date }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Time:</strong>
+                                    <p>{{ reservation.time }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Table:</strong>
+                                    <p>{{ table.name }} (Seats {{ table.capacity }})</p>
+                                </div>
+                                {% if reservation.special_requests %}
+                                <div class="col-12 mb-3">
+                                    <strong>Special Requests:</strong>
+                                    <p>{{ reservation.special_requests }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-dark mb-4">
+                        <div class="card-header">
+                            <h3 class="mb-0">Restaurant Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <strong>Restaurant:</strong>
+                                    <p>{{ info.name }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Phone:</strong>
+                                    <p>{{ info.phone }}</p>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <strong>Address:</strong>
+                                    <p>{{ info.address }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading"><i class="fas fa-info-circle me-2"></i>Important Information</h4>
+                        <ul class="mb-0">
+                            <li>Your reservation will be held for 15 minutes past your reservation time.</li>
+                            <li>To cancel or modify your reservation, please call us at {{ info.phone }} at least 2 hours before your scheduled time.</li>
+                            <li>If you have any questions, please email us at {{ info.email }}.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('menu') }}" class="btn btn-primary me-2">View Our Menu</a>
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-light">Return to Homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
